@@ -17,16 +17,34 @@ results = []
 
 
 def write_results():
-    with open('results.json', 'w') as file:
-        json.dump(results, file, ensure_ascii=True, indent=4)
+    with open('results.json', 'w', encoding='utf-8') as file:
+        json.dump(results, file, ensure_ascii=False, indent=4)
 
 
-async def write_file(file_path: str, file: bytes):
+async def write_file(file_path: str, file: bytes) -> None:
+    """
+        Write file
+        :param file_path: File path
+        :type file_path: str
+        :param file: File
+        :type file: bytes
+        :return: None
+    """
+
     async with aiofiles.open(file_path, 'wb') as buffer:
         await buffer.write(file)
 
 
-async def download_file(session: aiohttp.ClientSession, url: str):
+async def download_file(session: aiohttp.ClientSession, url: str) -> None:
+    """
+        Download file
+        :param session: Session
+        :type session: ClientSession
+        :param url: URL
+        :type url: str
+        :return: None
+    """
+
     async with session.get(url, headers=headers) as response:
         response.raise_for_status()
 
@@ -36,7 +54,16 @@ async def download_file(session: aiohttp.ClientSession, url: str):
         await write_file(f'media/{url.split("/")[-1]}', await response.read())
 
 
-async def get_page_data(session: aiohttp.ClientSession, page: int):
+async def get_page_data(session: aiohttp.ClientSession, page: int) -> None:
+    """
+        Get page data
+        :param session: Session
+        :type session: ClientSession
+        :param page: Page
+        :type page: int
+        :return: None
+    """
+
     _url = url + f'/page/{page}/'
 
     async with session.get(_url, headers=headers, allow_redirects=True) as response:
@@ -71,7 +98,11 @@ async def get_page_data(session: aiohttp.ClientSession, page: int):
             )
 
 
-async def gather_data():
+async def gather_data() -> None:
+    """
+        Gather data
+        :return: None
+    """
 
     async with aiohttp.ClientSession() as session:
         response = await session.get(url, headers=headers, allow_redirects=True)
