@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "NewsParser"
+name = "NewsParserAsync"
 version = "0.1.0"
 description = ""
 authors = ["_Anti_"]
