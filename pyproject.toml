@@ -1,0 +1,19 @@
+[tool.poetry]
+name = "NewsParser"
+version = "0.1.0"
+description = ""
+authors = ["_Anti_"]
+
+[tool.poetry.dependencies]
+python = "^3.9"
+requests = "^2.26.0"
+bs4 = "^0.0.1"
+lxml = "^4.6.4"
+aiohttp = "^3.8.1"
+aiofiles = "^0.7.0"
+
+[tool.poetry.dev-dependencies]
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
